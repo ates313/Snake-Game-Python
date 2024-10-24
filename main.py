@@ -79,12 +79,24 @@ window.onkey(goLeft, 'Left')
 while True:
     window.update()
 
+    if head.xcor() > 300 or head.xcor() < -300 or head.ycor() > 300 or head.ycor() < -300:
+        time.sleep(1)
+        head.goto(0, 0)
+        head.direction = 'stop'
+
+        for tail in tails:
+            tail.goto(1000, 1000)
+
+        tails = []
+        speed = 0.20
+
 
     if head.distance(eat) < 20:
         x = random.randint(-250, 250)
         y = random.randint(-250, 250)
         eat.goto(x, y)
 
+        speed = speed - 0.001
 
         newTail = turtle.Turtle()
         newTail.speed(0)
